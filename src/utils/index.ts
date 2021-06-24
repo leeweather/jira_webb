@@ -21,7 +21,7 @@ export const useMount = (callback: () => void) => {
   }, []);
 };
 
-export const useDebounce = (value: unknown, delay?: number) => {
+export const useDebounce = <V>(value: V, delay?: number) => {
   const [debounceValue, setDebounceValue] = useState(value);
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -30,4 +30,20 @@ export const useDebounce = (value: unknown, delay?: number) => {
     return () => clearTimeout(timeout);
   }, [value, delay]);
   return debounceValue;
+};
+
+export const useArray = <V>(initValue: V[]) => {
+  const [value, setValue] = useState(initValue);
+  const clear = (): void => setValue([]);
+  const removeIndex = (index: number) => {
+    const newValue = value.filter((v, i) => i !== index);
+    setValue(newValue);
+  };
+  const add = (addValue: V) => setValue([...value, addValue]);
+  return {
+    value,
+    clear,
+    removeIndex,
+    add,
+  };
 };
