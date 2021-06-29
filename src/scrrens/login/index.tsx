@@ -4,16 +4,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 export const LoginScreen = () => {
   const login = (param: { username: string; password: string }) => {
-    fetch(`${apiUrl}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(param),
-    }).then(async (res) => {
-      if (res.ok) {
-      }
-    });
+    
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (
@@ -34,8 +25,8 @@ export const LoginScreen = () => {
       <div>
         <label htmlFor="password">密码：</label>
         <input type="password" id="password" />
-        <button type="submit">登录</button>
       </div>
+        <button type="submit">登录</button>
     </form>
   );
 };
