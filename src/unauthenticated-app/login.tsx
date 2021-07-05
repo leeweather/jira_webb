@@ -1,11 +1,8 @@
+import { useAuth } from "context/auth-context";
 import React, { FormEvent, FormEventHandler } from "react";
 
-const apiUrl = process.env.REACT_APP_API_URL;
-
 export const LoginScreen = () => {
-  const login = (param: { username: string; password: string }) => {
-    
-  };
+  const { login, user } = useAuth();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (
     event: FormEvent<HTMLFormElement>
@@ -26,7 +23,7 @@ export const LoginScreen = () => {
         <label htmlFor="password">密码：</label>
         <input type="password" id="password" />
       </div>
-        <button type="submit">登录</button>
+      <button type="submit">登录</button>
     </form>
   );
 };
