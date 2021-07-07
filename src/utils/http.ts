@@ -48,3 +48,4 @@ export const useHttp = () => {
   return (...[endpoint, config]: Parameters<typeof http>) =>
     http(endpoint, { ...config, token: user?.token });
 };
+
