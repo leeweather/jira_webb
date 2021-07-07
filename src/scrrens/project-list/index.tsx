@@ -4,6 +4,7 @@ import { List } from "./list";
 import { useEffect, useState } from "react";
 import { changeObject, useDebounce, useMount } from "utils";
 import { useHttp } from "utils/http";
+import styled from "@emotion/styled";
 
 export const ProjectListScreen = () => {
   const [list, setList] = useState([]);
@@ -25,13 +26,18 @@ export const ProjectListScreen = () => {
   });
 
   return (
-    <div>
+    <Container>
+      <h1>项目列表</h1>
       <SearchPanel
         users={users}
         param={param}
         setParam={setParam}
       ></SearchPanel>
       <List users={users} list={list}></List>
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  padding: 3.2rem;
+`;
