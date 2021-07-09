@@ -8,15 +8,15 @@ interface AuthForm {
   password: string;
 }
 
-const bootstrapUser = async ()=>{
-  let user = null
-  const token = auth.getToken()
-  if(token){
-    const data = await http('me',{token})
-    user = data.user
+const bootstrapUser = async () => {
+  let user = null;
+  const token = auth.getToken();
+  if (token) {
+    const data = await http("me", { token });
+    user = data.user;
   }
-  return user
-}
+  return user;
+};
 
 const AuthContext = React.createContext<
   | {
@@ -29,16 +29,16 @@ const AuthContext = React.createContext<
 >(undefined);
 AuthContext.displayName = "AuthContext";
 
-export const AuthProvider = ({children}:{children:ReactNode}) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
   const login = (form: AuthForm) => auth.login(form).then(setUser);
   const register = (form: AuthForm) => auth.register(form).then(setUser);
-  const logout = () => auth.logout().then();
+  const logout = () => auth.logout().then(res => window.location.reload());
 
-  useMount(()=>{
-    bootstrapUser().then(setUser)
-  })
+  useMount(() => {
+    bootstrapUser().then(setUser);
+  });
 
   return (
     <AuthContext.Provider
@@ -55,5 +55,5 @@ export const useAuth = () => {
     throw new Error("useAuth必须在AuthProvider内部使用");
   }
 
-  return context
+  return context;
 };
